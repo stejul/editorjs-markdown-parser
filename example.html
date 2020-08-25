@@ -1,3 +1,21 @@
+<link href="https://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet">
+<link href="assets/demo.css" rel="stylesheet">
+<script src="markdown-parser.js"></script>
+
+<link href="markdown-parser.css" rel="stylesheet"/>
+
+<div class="ce-example__button" id="saveButton">
+    editor.save()
+</div>
+<div class="ce-example__output">
+    <pre class="ce-example__output-content" id="output"></pre>
+</div>
+
+<div class="ce-example__content _ce-example__content--small">
+    <div id="editorjs">
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script><!-- Header -->
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest"></script><!-- Image -->
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/delimiter@latest"></script><!-- Delimiter -->
@@ -12,14 +30,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script><!-- Marker -->
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code -->
+<script src="assets/json-preview.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
-<script src="markdown-parser.js"></script>
-
-<link href="markdown-parser.css" rel="stylesheet"/>
-
-<div id="editorjs"></div>
-
 <script>
+    const saveButton = document.getElementById('saveButton');
+
+
     const editor = new EditorJS({
       autofocus: true,
         
@@ -98,6 +114,10 @@
           inlineToolbar: true,
           shortcut: 'CMD+ALT+T'
         },
+
+        image: SimpleImage,
+
+        markdownParser: MarkdownParser,
 
       },
 
@@ -208,6 +228,18 @@
           },
         ]
       },
+        onReady: function(){
+            saveButton.click();
+        },
+        onChange: function(){
+            console.log('something changed');
+        }
+    });
+
+    saveButton.addEventListener('click', function () {
+        editor.save().then((savedData) => {
+            cPreview.show(savedData, document.getElementById("output"));
+        });
     });
 </script>
 

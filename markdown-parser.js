@@ -3,7 +3,10 @@ class MarkdownParser
   constructor({ data, api }) {
     this.data = data;
     this.api = api;
+    this.export = document.querySelector('[data-tool="markdownParser"]')
+    this.getContent();
   }
+
   static get toolbox() {
     return {
       title: 'Markdown Parser',
@@ -13,10 +16,19 @@ class MarkdownParser
 
   render()
   {
-    console.log('Data log');
-    console.log(this.data);
-
+    return document.createElement('div');
   }
+
+  getContent()
+  {
+    //TODO: find out how all the modules can be extracted
+    this.api.listeners.on(this.export, "click", () => {
+      console.log("Paragraph");
+      console.log(this.api.blocks.getBlockByIndex(9));
+      console.log("image");
+      console.log(this.api.blocks.getBlockByIndex(13));
+  }, false);
+}
 
   save()
   {

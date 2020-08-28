@@ -21,13 +21,19 @@ class MarkdownParser
 
   getContent()
   {
-    //TODO: find out how all the modules can be extracted
-    this.api.listeners.on(this.export, "click", () => {
-      console.log("Paragraph");
-      console.log(this.api.blocks.getBlockByIndex(9));
-      console.log("image");
-      console.log(this.api.blocks.getBlockByIndex(13));
-  }, false);
+        /**
+        * when console.log(savedData) is used
+        * the blocks are being showed as objects (which is needed)
+        */
+        let a = [];
+        const testContent = this.api.saver.save().then((savedData) => {
+          a.push(savedData);
+        });
+
+        //TODO: cleanup array, so its easier to use, iterate over, parse, etc.
+        //Maybe remove the array somehow after saving to it?
+        console.log(a);
+
 }
 
   save()

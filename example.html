@@ -1,20 +1,10 @@
+<html>
+<head>
 <link href="https://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet">
 <link href="assets/demo.css" rel="stylesheet">
 <script src="markdown-parser.js"></script>
 
 <link href="markdown-parser.css" rel="stylesheet"/>
-
-<div class="ce-example__button" id="saveButton">
-    editor.save()
-</div>
-<div class="ce-example__output">
-    <pre class="ce-example__output-content" id="output"></pre>
-</div>
-
-<div class="ce-example__content _ce-example__content--small">
-    <div id="editorjs">
-    </div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script><!-- Header -->
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest"></script><!-- Image -->
@@ -32,6 +22,22 @@
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code -->
 <script src="assets/json-preview.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+<meta charset="utf-8" />
+</head>
+
+<div class="ce-example__button" id="saveButton">
+    editor.save()
+</div>
+<div class="ce-example__output">
+    <pre class="ce-example__output-content" id="output"></pre>
+</div>
+
+<div class="ce-example__content _ce-example__content--small">
+    <div id="editorjs">
+    </div>
+</div>
+
+
 <script>
     const saveButton = document.getElementById('saveButton');
 
@@ -242,4 +248,4 @@
         });
     });
 </script>
-
+</html>

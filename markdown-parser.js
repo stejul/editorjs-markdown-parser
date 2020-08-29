@@ -1,4 +1,4 @@
-class MarkdownParser {
+export default class MarkdownParser {
   constructor({ data, api }) {
     this.data = data;
     this.api = api;

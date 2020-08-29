@@ -1,10 +1,9 @@
 <html>
 <head>
-<script src="markdown-parser.js" type="module">
-    import {MarkdownParser} from './markdown-parser.js';
-</script>
 <link href="https://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet">
 <link href="assets/demo.css" rel="stylesheet">
+
+<script src="markdown-parser.js" type="module"></script>
 
 <link href="markdown-parser.css" rel="stylesheet"/>
 
@@ -40,11 +39,9 @@
 </div>
 
 
-<script type="module">
-
-    import {MarkdownParser} from './markdown-parser.js';
+<script>
+    import { MarkdownParser } from './markdown-parser.js';
     const saveButton = document.getElementById('saveButton');
-
 
 
     const editor = new EditorJS({

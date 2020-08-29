@@ -1,4 +1,4 @@
-class HeaderTypeParser
+export default class HeaderTypeParser
 {
   //TODO: Implement Parser
   constructor(){

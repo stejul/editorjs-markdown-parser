@@ -36,7 +36,7 @@ export default class MarkdownParser {
     console.log(a.content[0].type);
     console.log(a.content[0].data.level);
     console.log(a.content[0].data.text);
-    parseToMarkdown(a.content[0], './', 'test.md');
+    parseToMarkdown(a.content[0].data, './', 'test.md');
 
   }
 

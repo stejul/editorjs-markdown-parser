@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-entry: './markdown-parser.js',
+entry: './src/index.js',
   module: {
     rules: [
       {
@@ -22,6 +22,7 @@ entry: './markdown-parser.js',
       },
     ],
   },
+  node: { global: true, fs: 'empty' },
   output: {
     path: path.join(__dirname, '/dist'),
     publicPath: '/',

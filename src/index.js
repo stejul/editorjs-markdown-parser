@@ -1,8 +1,11 @@
+import HeaderTypeParser from './BlockTypeParsers/header-type-parser.js';
+
 export default class MarkdownParser {
   constructor({ data, api }) {
     this.data = data;
     this.api = api;
     this.export = document.querySelector('[data-tool="markdownParser"]');
+    const test = require('./BlockTypeParsers/header-type-parser.js');
     this.getContent();
   }
 
@@ -18,18 +21,14 @@ export default class MarkdownParser {
   }
 
   async getContent() {
-    /**
-        * when console.log(savedData) is used
-        * the blocks are being showed as objects (which is needed)
-        */
     const a = {};
     const data = await this.api.saver.save();
-    
-    a['content'] = data.blocks;
+
+    a.content = data.blocks;
     console.log(a.content.forEach((item, index) => {
-      console.log(item.type);
-      console.log(item.data);
-      //TODO: Implement case blocks
+      console.log(item[0]);
+      console.log(item[0]);
+      // TODO: Implement case blocks
       // where all the types get parsed further to
       // the specific blocktype parsers
     }));

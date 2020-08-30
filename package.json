@@ -9,8 +9,16 @@
     "babel-loader": "^8.1.0",
     "eslint": "^7.7.0",
     "eslint-config-airbnb-base": "14.2.0",
+    "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "2.22.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
+  },
+  "name": "editorjsparsertomarkdown",
+  "description": "Markdown Parser for Editor.js",
+  "version": "1.0.0",
+  "main": "markdown-parser.js",
+  "dependencies": {
+    "require": "^2.4.20"
   }
 }

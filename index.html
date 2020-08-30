@@ -2,10 +2,9 @@
 <head>
 <link href="https://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet">
 <link href="assets/demo.css" rel="stylesheet">
+<script src="dist/bundle.js" type="module"></script>
 
-<script src="markdown-parser.js" type="module"></script>
-
-<link href="markdown-parser.css" rel="stylesheet"/>
+<link href="src/markdown-parser.css" rel="stylesheet"/>
 
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script><!-- Header -->
 <script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest"></script><!-- Image -->
@@ -39,9 +38,11 @@
 </div>
 
 
-<script>
-    import { MarkdownParser } from './markdown-parser.js';
+<script type="module">
+
+    import MarkdownParser from './src/index.js'; 
     const saveButton = document.getElementById('saveButton');
+
 
 
     const editor = new EditorJS({

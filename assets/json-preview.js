@@ -1,7 +1,7 @@
 /**
  * Module to compose output JSON preview
  */
-const cPreview = (function (module) {
+export default const cPreview = (function (module) {
   /**
    * Shows JSON in pretty preview
    * @param {object} output - what to show

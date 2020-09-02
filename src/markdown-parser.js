@@ -48,10 +48,8 @@ export default class MarkdownParser {
     element.href = url;
     element.download = 'example.md';
     element.click();
-    setTimeout(() => {
-      window.URL.revokeObjectURL(url);
-      document.body.removeChild(element);
-    }, 0);
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(element);
 
 
   }

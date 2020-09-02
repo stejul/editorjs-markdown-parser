@@ -36,7 +36,23 @@ export default class MarkdownParser {
     console.log(a.content[0].type);
     console.log(a.content[0].data.level);
     console.log(a.content[0].data.text);
-    parseToMarkdown(a.content[0].data, './', 'test.md');
+    console.log(parseToMarkdown(a.content[0].data));
+    //NOTE: Add "\n" at the end of every parsing element so a line break is created
+    const testFile = new File([parseToMarkdown(a.content[0].data), "\n### Test3"],{ type: 'text/markdown', endings: 'transparent' });
+    console.log(testFile);
+    const url = URL.createObjectURL(testFile);
+
+    //Create Download link
+    const element = document.createElement('a');
+    document.body.appendChild(element);
+    element.href = url;
+    element.download = 'example.md';
+    element.click();
+    setTimeout(() => {
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(element);
+    }, 0);
+
 
   }
 

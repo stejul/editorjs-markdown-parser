@@ -1,4 +1,7 @@
-import { parseToMarkdown } from './BlockTypeParsers/header-type-parser';
+import { parseHeaderToMarkdown } from './BlockTypeParsers/header-type-parser';
+import { parseParagraphToMarkdown } from './BlockTypeParsers/paragraph-type-parser';
+import { parseListToMarkdown } from './BlockTypeParsers/list-type-parser';
+import { fileHandler } from './file-handler';
 
 export default class MarkdownParser {
   constructor({ data, api }) {
@@ -24,34 +27,25 @@ export default class MarkdownParser {
     const data = await this.api.saver.save();
 
     a.content = data.blocks;
-    //console.log(a.content.forEach((item, index) => {
-      // console.log(item.type);
-      // console.log(item);
-      // TODO: Implement case blocks
-      // where all the types get parsed further to
-      // the specific blocktype parsers
+    // console.log(a.content.forEach((item, index) => {
+    // console.log(item.type);
+    // console.log(item);
+    // TODO: Implement case blocks
+    // where all the types get parsed further to
+    // the specific blocktype parsers
 
-    //}));
+    // }));
+    console.log(a.content.length);
     console.log(a.content[0]);
-    console.log(a.content[0].type);
-    console.log(a.content[0].data.level);
-    console.log(a.content[0].data.text);
-    console.log(parseToMarkdown(a.content[0].data));
-    //NOTE: Add "\n" at the end of every parsing element so a line break is created
-    const testFile = new File([parseToMarkdown(a.content[0].data), "\n### Test3"],{ type: 'text/markdown', endings: 'transparent' });
-    console.log(testFile);
-    const url = URL.createObjectURL(testFile);
+    console.log(a.content[3]);
+    console.log(a.content[3].type);
+    //console.log(a.content[0].data.level);
+    console.log(a.content[3].data.text);
+    //TODO: remove comma after first item
+    console.log(parseListToMarkdown(a.content[3].data));
+    // NOTE: Add "\n" at the end of every parsing element so a line break is created
 
-    //Create Download link
-    const element = document.createElement('a');
-    document.body.appendChild(element);
-    element.href = url;
-    element.download = 'example.md';
-    element.click();
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(element);
-
-
+    fileHandler(parseListToMarkdown(a.content[3].data), 'example.md');
   }
 
   save() {

@@ -1,6 +1,9 @@
 import { parseHeaderToMarkdown } from './BlockTypeParsers/header-type-parser';
 import { parseParagraphToMarkdown } from './BlockTypeParsers/paragraph-type-parser';
 import { parseListToMarkdown } from './BlockTypeParsers/list-type-parser';
+import { parseDelimiterToMarkdown } from './BlockTypeParsers/delimiter-type-parser';
+import { parseImageToMarkdown } from './BlockTypeParsers/image-type-parser';
+import { parseCheckboxToMarkdown} from './BlockTypeParsers/checkbox-type-parser';
 import { fileHandler } from './file-handler';
 
 export default class MarkdownParser {
@@ -36,16 +39,16 @@ export default class MarkdownParser {
 
     // }));
     console.log(a.content.length);
-    console.log(a.content[0]);
+    console.log(a.content);
+    console.log(a.content[13]);
     console.log(a.content[3]);
     console.log(a.content[3].type);
-    //console.log(a.content[0].data.level);
+    // console.log(a.content[0].data.level);
     console.log(a.content[3].data.text);
-    //TODO: remove comma after first item
-    console.log(parseListToMarkdown(a.content[3].data));
+    // TODO: remove comma after first item
     // NOTE: Add "\n" at the end of every parsing element so a line break is created
 
-    fileHandler(parseListToMarkdown(a.content[3].data), 'example.md');
+    fileHandler(parseCheckboxToMarkdown(a.content[14].data), 'example.md');
   }
 
   save() {

@@ -270,7 +270,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"parseListToMarkdown\", function() { return parseListToMarkdown; });\nfunction parseListToMarkdown(blocks) {\n  var items = {};\n\n  switch (blocks.style) {\n    case 'unordered':\n      items = blocks.items.map(function (item) {\n        return \"* \".concat(item, \"\\n\");\n      });\n      return items;\n      break;\n\n    case 'ordered':\n      items = blocks.items.map(function (item, index) {\n        return \"\".concat(index + 1, \" \").concat(item, \"\\n\");\n      });\n      return items;\n      break;\n\n    default:\n      break;\n  }\n}\n\n//# sourceURL=webpack://MarkdownParser/./src/BlockTypeParsers/list-type-parser.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"parseListToMarkdown\", function() { return parseListToMarkdown; });\nfunction parseListToMarkdown(blocks) {\n  var items = {};\n\n  switch (blocks.style) {\n    case 'unordered':\n      items = blocks.items.map(function (item) {\n        return \"* \".concat(item);\n      });\n      return items.join(\"\\n\");\n      break;\n\n    case 'ordered':\n      items = blocks.items.map(function (item, index) {\n        return \"\".concat(index + 1, \" \").concat(item, \"\\n\");\n      });\n      return items;\n      break;\n\n    default:\n      break;\n  }\n}\n\n//# sourceURL=webpack://MarkdownParser/./src/BlockTypeParsers/list-type-parser.js?");
 
 /***/ }),
 

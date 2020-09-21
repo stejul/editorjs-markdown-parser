@@ -3,10 +3,10 @@ export function parseListToMarkdown(blocks) {
   switch(blocks.style) {
     case 'unordered':
       items = blocks.items.map((item) => {
-        return(`* ${item}\n`);
+        return(`* ${item}`);
       });
       
-      return items;
+      return items.join("\n");
       break;
     case 'ordered':
       items = blocks.items.map((item, index) => {

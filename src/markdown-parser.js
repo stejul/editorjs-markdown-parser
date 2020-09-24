@@ -4,6 +4,7 @@ import { parseListToMarkdown } from './BlockTypeParsers/list-type-parser';
 import { parseDelimiterToMarkdown } from './BlockTypeParsers/delimiter-type-parser';
 import { parseImageToMarkdown } from './BlockTypeParsers/image-type-parser';
 import { parseCheckboxToMarkdown} from './BlockTypeParsers/checkbox-type-parser';
+import { parseQuoteToMarkdown } from './BlockTypeParsers/quote-type-parser';
 import { fileHandler } from './file-handler';
 
 export default class MarkdownParser {
@@ -30,14 +31,6 @@ export default class MarkdownParser {
     const data = await this.api.saver.save();
 
     a.content = data.blocks;
-    // console.log(a.content.forEach((item, index) => {
-    // console.log(item.type);
-    // console.log(item);
-    // TODO: Implement case blocks
-    // where all the types get parsed further to
-    // the specific blocktype parsers
-
-    // }));
     console.log(a.content.length);
     console.log(a.content);
     console.log(a.content[13]);
@@ -48,7 +41,7 @@ export default class MarkdownParser {
     // TODO: remove comma after first item
     // NOTE: Add "\n" at the end of every parsing element so a line break is created
 
-    fileHandler(parseCheckboxToMarkdown(a.content[14].data), 'example.md');
+    fileHandler(parseQuoteToMarkdown(a.content[14].data), 'example.md');
   }
 
   save() {

@@ -1,3 +1,3 @@
 export function parseQuoteToMarkdown(blocks) {
-    return `> ${blocks.text}\n`;
+  return `> ${blocks.text}\n`;
 }

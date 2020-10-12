@@ -32,17 +32,69 @@ export default class MarkdownParser {
     const data = await this.api.saver.save();
 
     a.content = data.blocks;
-    console.log(a.content.length);
+    //console.log(a.content.length);
     console.log(a.content);
-    console.log(a.content[14]);
-    console.log(a.content[3]);
-    console.log(a.content[3].type);
+    //console.log(a.content[14]);
+    //console.log(a.content[3]);
+    //console.log(a.content[3].type);
     // console.log(a.content[0].data.level);
-    console.log(a.content[3].data.text);
+    //console.log(a.content[3].data.text);
     // TODO: remove comma after first item
     // NOTE: Add "\n" at the end of every parsing element so a line break is created
 
-    fileHandler(parseCodeToMarkdown(a.content[14].data), 'example.md');
+    //fileHandler(parseCodeToMarkdown(a.content[14].data), 'example.md');
+
+    const b = [
+      a.content.map(item => {
+        switch(item.type) {
+          case 'header':
+            return parseHeaderToMarkdown(item.data);
+          case 'paragraph':
+            return parseParagraphToMarkdown(item.data);
+          case 'list':
+            return parseListToMarkdown(item.data);
+          case 'delimiter':
+            return parseDelimiterToMarkdown(item);
+          case 'image':
+            return parseImageToMarkdown(item.data);
+          case 'quote':
+            return parseQuoteToMarkdown(item.data);
+          case 'checkbox':
+            return parseCheckboxToMarkdown(item.data);
+          case 'code':
+            return parseCodeToMarkdown(item.data);
+          default:
+            break;
+        }
+      })
+    ];
+
+    fileHandler(b.join('\n'), 'example.md');
+    //b.map((item, index) => {
+    //  a.content.forEach((item, index) => {
+    //    switch(item.type) {
+    //      case 'header':
+    //        return parseHeaderToMarkdown(item[index].data);
+    //      case 'paragraph':
+    //        return parseParagraphToMarkdown(item[index].data);
+    //      case 'list':
+    //        return parseListToMarkdown(item[index].data);
+    //      case 'delimiter':
+    //        return parseDelimiterToMarkdown(item[index]);
+    //      case 'image':
+    //        return parseImageToMarkdown(item[index].data);
+    //      case 'quote':
+    //        return parseQuoteToMarkdown(item[index].data);
+    //      case 'checkbox':
+    //        return parseCheckboxToMarkdown(item[index].data);
+    //      case 'code':
+    //        return parseCodeToMarkdown(item[index].data);
+    //      default:
+    //        break;
+    //    }
+    //  });
+    //});
+    console.log(b);
   }
 
   save() {

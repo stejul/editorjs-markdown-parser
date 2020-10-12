@@ -1,3 +1,3 @@
 export function parseCodeToMarkdown(blocks) {
-    return `\`\`\`\n${blocks.code}\n\`\`\`\n`;
+  return `\`\`\`\n${blocks.code}\n\`\`\`\n`;
 }

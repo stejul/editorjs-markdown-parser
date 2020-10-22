@@ -6,8 +6,6 @@ export function parseCheckboxToMarkdown(blocks) {
       return `- [x] ${item.text}`;
     }
     return `- [ ] ${item.text}`;
-
-    return null;
   });
 
   return items.join('\n');

@@ -1,4 +1,4 @@
-export function fileHandler(content, fileName) {
+export function fileDownloadHandler(content, fileName) {
   const file = new File([content], { type: 'text/markdown', endings: 'transparent' });
   const url = URL.createObjectURL(file);
 
@@ -9,4 +9,11 @@ export function fileHandler(content, fileName) {
   element.click();
   window.URL.revokeObjectURL(url);
   document.body.removeChild(element);
+}
+
+export function fileUploadHandler(){
+  const reader = new FileReader();
+  reader.addEventListener('load', (event) => {
+    console.log(event.target.result);
+  });
 }

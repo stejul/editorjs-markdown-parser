@@ -3,17 +3,16 @@ import { parseParagraphToMarkdown } from './BlockTypeParsers/paragraph-type-pars
 import { parseListToMarkdown } from './BlockTypeParsers/list-type-parser';
 import { parseDelimiterToMarkdown } from './BlockTypeParsers/delimiter-type-parser';
 import { parseImageToMarkdown } from './BlockTypeParsers/image-type-parser';
-import { parseCheckboxToMarkdown} from './BlockTypeParsers/checkbox-type-parser';
+import { parseCheckboxToMarkdown } from './BlockTypeParsers/checkbox-type-parser';
 import { parseQuoteToMarkdown } from './BlockTypeParsers/quote-type-parser';
 import { parseCodeToMarkdown } from './BlockTypeParsers/code-type-parser';
-import { fileHandler } from './file-handler';
+import { fileDownloadHandler } from './file-handler';
 
 export default class MarkdownParser {
   constructor({ data, api }) {
     this.data = data;
     this.api = api;
     this.export = document.querySelector('[data-tool="markdownParser"]');
-    this.getContent();
   }
 
   static get toolbox() {
@@ -24,6 +23,7 @@ export default class MarkdownParser {
   }
 
   render() {
+    this.getContent();
     return document.createElement('div');
   }
 
@@ -34,32 +34,31 @@ export default class MarkdownParser {
     a.content = data.blocks;
     console.log(a.content);
 
-    //TODO: remove html tags in paragraphs (code, highlight, a href)
-    const b = a.content.map(item => {
-        switch(item.type) {
-          case 'header':
-            return parseHeaderToMarkdown(item.data);
-          case 'paragraph':
-            return parseParagraphToMarkdown(item.data);
-          case 'list':
-            return parseListToMarkdown(item.data);
-          case 'delimiter':
-            return parseDelimiterToMarkdown(item);
-          case 'image':
-            return parseImageToMarkdown(item.data);
-          case 'quote':
-            return parseQuoteToMarkdown(item.data);
-          case 'checkbox':
-            return parseCheckboxToMarkdown(item.data);
-          case 'code':
-            return parseCodeToMarkdown(item.data);
-          default:
-            break;
-        }
-      });
-    
+    // TODO: remove html tags in paragraphs (code, highlight, a href)
+    const b = a.content.map((item) => {
+      switch (item.type) {
+        case 'header':
+          return parseHeaderToMarkdown(item.data);
+        case 'paragraph':
+          return parseParagraphToMarkdown(item.data);
+        case 'list':
+          return parseListToMarkdown(item.data);
+        case 'delimiter':
+          return parseDelimiterToMarkdown(item);
+        case 'image':
+          return parseImageToMarkdown(item.data);
+        case 'quote':
+          return parseQuoteToMarkdown(item.data);
+        case 'checkbox':
+          return parseCheckboxToMarkdown(item.data);
+        case 'code':
+          return parseCodeToMarkdown(item.data);
+        default:
+          break;
+      }
+    });
 
-    fileHandler(b.join('\n'), 'example.md');
+    fileDownloadHandler(b.join('\n'), 'example.md');
     console.log(b);
   }
 

@@ -13,13 +13,17 @@ import LinkTool from '@editorjs/link';
 import Table from '@editorjs/table';
 import Marker from '@editorjs/marker';
 import MarkdownParser from './markdown-parser';
-import { fileUploadHandler } from './file-handler';
+import { fileUploadHandler, parseFromMarkdown } from './file-handler';
 
 import { dataField } from './data';
 
 const uploadButton = document.getElementById('fileUpload');
-const test = uploadButton.addEventListener('change', (e) => fileUploadHandler(e));
-console.log(test);
+const fileToParse= uploadButton.addEventListener('change', (e) => fileUploadHandler(e));
+
+const importButton = document.getElementById('parseButton');
+
+importButton.onclick 
+
 
 const saveButton = document.getElementById('saveButton');
 const newDataField = {};

@@ -11,9 +11,14 @@ export function fileDownloadHandler(content, fileName) {
   document.body.removeChild(element);
 }
 
-export function fileUploadHandler(){
+export function fileUploadHandler(event) {
+  // console.log(event.target);
+  const file = event.target.files[0];
   const reader = new FileReader();
-  reader.addEventListener('load', (event) => {
-    console.log(event.target.result);
-  });
+  const test = reader.onload = (e) => {
+    console.log(e.target.result);
+    return e.target.result;
+  };
+
+  return reader.readAsText(file);
 }

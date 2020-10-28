@@ -35,7 +35,9 @@
   "version": "1.0.0",
   "main": "markdown-parser.js",
   "dependencies": {
+    "css-loader": "^5.0.0",
     "remark": "^13.0.0",
-    "require": "^2.4.20"
+    "require": "^2.4.20",
+    "style-loader": "^2.0.0"
   }
 }

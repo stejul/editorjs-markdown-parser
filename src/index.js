@@ -13,8 +13,13 @@ import LinkTool from '@editorjs/link';
 import Table from '@editorjs/table';
 import Marker from '@editorjs/marker';
 import MarkdownParser from './markdown-parser';
+import { fileUploadHandler } from './file-handler';
 
 import { dataField } from './data';
+
+const uploadButton = document.getElementById('fileUpload');
+const test = uploadButton.addEventListener('change', (e) => fileUploadHandler(e));
+console.log(test);
 
 const saveButton = document.getElementById('saveButton');
 const newDataField = {};
@@ -116,6 +121,7 @@ const editor = new EditorJS({
     saveButton.click();
   },
   onChange() {
+    console.log(test);
     console.log('something changed');
   },
 });

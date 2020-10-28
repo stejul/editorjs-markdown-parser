@@ -6,13 +6,14 @@ import { parseImageToMarkdown } from './BlockTypeParsers/image-type-parser';
 import { parseCheckboxToMarkdown } from './BlockTypeParsers/checkbox-type-parser';
 import { parseQuoteToMarkdown } from './BlockTypeParsers/quote-type-parser';
 import { parseCodeToMarkdown } from './BlockTypeParsers/code-type-parser';
-import { fileDownloadHandler } from './file-handler';
+import { fileDownloadHandler, fileUploadHandler } from './file-handler';
+import './markdown-parser.css';
 
 export default class MarkdownParser {
   constructor({ data, api }) {
     this.data = data;
     this.api = api;
-    this.export = document.querySelector('[data-tool="markdownParser"]');
+    // this.export = document.querySelector('[data-tool="markdownParser"]');
   }
 
   static get toolbox() {
@@ -23,8 +24,27 @@ export default class MarkdownParser {
   }
 
   render() {
-    this.getContent();
-    return document.createElement('div');
+    const buttons = document.createElement('div');
+
+    const exportButton = document.createElement('button');
+    exportButton.setAttribute('class', 'MarkdownButton');
+    exportButton.append('Export To Markdown');
+    exportButton.setAttribute('onclick', this.getContent());
+
+    //const importButton = document.createElement('file');
+    //importButton.setAttribute('class', 'MarkdownButton');
+    //importButton.append('Import To Markdown');
+
+    // const importButton = document.createElement('form');
+    // const fileUpload = document.createElement('input');
+    // fileUpload.setAttribute('class', 'MarkdownButton');
+    // fileUpload.setAttribute('id', 'exportUpload');
+    // fileUpload.setAttribute('type', 'file');
+    //fileUpload.setAttribute('onchange', fileUploadHandler(event));
+    // importButton.append(fileUpload);
+    buttons.append(exportButton);
+    // buttons.append(importButton);
+    return buttons;
   }
 
   async getContent() {

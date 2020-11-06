@@ -1,4 +1,5 @@
-import { fileUploadHandler } from './file-handler';
+import * as remark from 'remark';
+
 export default class ImportMarkdown {
   constructor({ data, api }) {
     this.data = data;
@@ -35,7 +36,6 @@ export default class ImportMarkdown {
 
     fileUpload.onchange = (e) => {
       const file = e.target.files[0];
-      console.log(file);
 
       const reader = new FileReader();
       reader.readAsText(file, 'UTF-8');
@@ -43,11 +43,11 @@ export default class ImportMarkdown {
       reader.onload = (readerEvent) => {
         const content = readerEvent.target.result;
         console.log(content);
+        console.log(remark().parse(content));
+        return remark().parse(content);
       };
     };
     fileUpload.click();
-    console.log('fileupload log');
-    console.log(fileUpload);
   }
 
   save() {

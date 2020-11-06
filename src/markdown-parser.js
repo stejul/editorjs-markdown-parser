@@ -18,41 +18,28 @@ export default class MarkdownParser {
 
   static get toolbox() {
     return {
-      title: 'Markdown Parser',
-      icon: '<svg xmlns="http://www.w3.org/2000/svg" width="17" height="15" viewBox="0 0 24 24" fill="none" stroke="#707684" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>',
+      title: 'Download Markdown',
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgb(112, 118, 132)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>',
     };
   }
 
   render() {
-    const buttons = document.createElement('div');
+    const doc = document.createElement('div');
 
-    const exportButton = document.createElement('button');
-    exportButton.setAttribute('class', 'MarkdownButton');
-    exportButton.append('Export To Markdown');
-    exportButton.setAttribute('onclick', this.getContent());
-
-    //const importButton = document.createElement('file');
-    //importButton.setAttribute('class', 'MarkdownButton');
-    //importButton.append('Import To Markdown');
-
-    // const importButton = document.createElement('form');
-    // const fileUpload = document.createElement('input');
-    // fileUpload.setAttribute('class', 'MarkdownButton');
-    // fileUpload.setAttribute('id', 'exportUpload');
-    // fileUpload.setAttribute('type', 'file');
-    //fileUpload.setAttribute('onchange', fileUploadHandler(event));
-    // importButton.append(fileUpload);
-    buttons.append(exportButton);
-    // buttons.append(importButton);
-    return buttons;
+    this.getContent();
+    return doc;
   }
 
   async getContent() {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const yyyy = today.getFullYear();
+
     const a = {};
     const data = await this.api.saver.save();
 
     a.content = data.blocks;
-    console.log(a.content);
 
     // TODO: remove html tags in paragraphs (code, highlight, a href)
     const b = a.content.map((item) => {
@@ -78,13 +65,12 @@ export default class MarkdownParser {
       }
     });
 
-    fileDownloadHandler(b.join('\n'), 'example.md');
-    console.log(b);
+    fileDownloadHandler(b.join('\n'), `entry_${dd}-${mm}-${yyyy}.md`);
   }
 
   save() {
     return {
-      message: 'Parsing Markdown',
+      message: 'Downloading Markdown',
     };
   }
 }

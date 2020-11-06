@@ -13,17 +13,10 @@ import LinkTool from '@editorjs/link';
 import Table from '@editorjs/table';
 import Marker from '@editorjs/marker';
 import MarkdownParser from './markdown-parser';
+import ImportMarkdown from './import-markdown';
 import { fileUploadHandler, parseFromMarkdown } from './file-handler';
 
 import { dataField } from './data';
-
-const uploadButton = document.getElementById('fileUpload');
-const fileToParse= uploadButton.addEventListener('change', (e) => fileUploadHandler(e));
-
-const importButton = document.getElementById('parseButton');
-
-importButton.onclick 
-
 
 const saveButton = document.getElementById('saveButton');
 const newDataField = {};
@@ -110,6 +103,8 @@ const editor = new EditorJS({
 
     markdownParser: MarkdownParser,
 
+    markdownImporter: ImportMarkdown,
+
   },
 
   /**
@@ -125,7 +120,6 @@ const editor = new EditorJS({
     saveButton.click();
   },
   onChange() {
-    console.log(test);
     console.log('something changed');
   },
 });

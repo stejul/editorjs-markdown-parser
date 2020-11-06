@@ -12,20 +12,18 @@ export function fileDownloadHandler(content, fileName) {
 }
 
 export function fileUploadHandler(event) {
-  // console.log(event.target);
+  console.log('it works somehow');
   const remark = require('remark');
   const file = event.target.files[0];
   const reader = new FileReader();
-  const test = reader.onload = (e) => {
+  reader.onload = (e) => {
     console.log(remark().parse(e.target.result));
     return remark().parse(e.target.result);
     return e.target.result;
-
   };
 
   return reader.readAsText(file);
 }
-
 
 export function parseFromMarkdown(string) {
   const remark = require('remark');

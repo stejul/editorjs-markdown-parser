@@ -19,7 +19,6 @@ import { fileUploadHandler, parseFromMarkdown } from './file-handler';
 import { dataField } from './data';
 
 const saveButton = document.getElementById('saveButton');
-const newDataField = {};
 const editor = new EditorJS({
   autofocus: true,
 

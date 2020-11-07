@@ -13,3 +13,26 @@ export function parseListToMarkdown(blocks) {
       break;
   }
 }
+
+export function parseMarkdownToList(blocks) {
+  let listData = {};
+  const itemData = [];
+
+  blocks.children.forEach((items) => {
+    items.children.forEach((listItem) => {
+      listItem.children.forEach((listEntry) => {
+        itemData.push(listEntry.value);
+      });
+    });
+  });
+
+  listData = {
+    data: {
+      items: itemData,
+      style: blocks.ordered ? 'ordered' : 'unordered',
+    },
+    type: 'list',
+  };
+
+  return listData;
+}

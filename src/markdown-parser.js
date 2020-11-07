@@ -60,6 +60,8 @@ export default class MarkdownParser {
           return parseCheckboxToMarkdown(item.data);
         case 'code':
           return parseCodeToMarkdown(item.data);
+        case 'checklist':
+          return parseCheckboxToMarkdown(item.data);
         default:
           break;
       }

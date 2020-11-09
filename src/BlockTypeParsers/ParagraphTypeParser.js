@@ -15,6 +15,18 @@ export function parseMarkdownToParagraph(blocks) {
           type: 'paragraph',
         };
       }
+      if (item.type === 'image') {
+        paragraphData = {
+          data: {
+            caption: item.title,
+            stretched: false,
+            url: item.url,
+            withBackground: false,
+            withBorder: false,
+          },
+          type: 'image',
+        };
+      }
     });
   }
   return paragraphData;

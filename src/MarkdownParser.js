@@ -1,21 +1,29 @@
-import { parseHeaderToMarkdown } from './BlockTypeParsers/header-type-parser';
-import { parseParagraphToMarkdown } from './BlockTypeParsers/paragraph-type-parser';
-import { parseListToMarkdown } from './BlockTypeParsers/list-type-parser';
-import { parseDelimiterToMarkdown } from './BlockTypeParsers/delimiter-type-parser';
-import { parseImageToMarkdown } from './BlockTypeParsers/image-type-parser';
-import { parseCheckboxToMarkdown } from './BlockTypeParsers/checkbox-type-parser';
-import { parseQuoteToMarkdown } from './BlockTypeParsers/quote-type-parser';
-import { parseCodeToMarkdown } from './BlockTypeParsers/code-type-parser';
-import { fileDownloadHandler, fileUploadHandler } from './file-handler';
-import './markdown-parser.css';
+import { parseHeaderToMarkdown } from './BlockTypeParsers/HeaderTypeParser';
+import { parseParagraphToMarkdown } from './BlockTypeParsers/ParagraphTypeParser';
+import { parseListToMarkdown } from './BlockTypeParsers/ListTypeParser';
+import { parseDelimiterToMarkdown } from './BlockTypeParsers/DelimiterTypeParser';
+import { parseImageToMarkdown } from './BlockTypeParsers/ImageTypeParser';
+import { parseCheckboxToMarkdown } from './BlockTypeParsers/CheckboxTypeParser';
+import { parseQuoteToMarkdown } from './BlockTypeParsers/QuoteTypeParser';
+import { parseCodeToMarkdown } from './BlockTypeParsers/CodeTypeParser';
+import { fileDownloadHandler } from './FileHandler';
 
+/**
+ * Markdown Parsing class
+ */
 export default class MarkdownParser {
+  /**
+   * creates the Parser plugin
+   * {editorData, api functions} - necessary to interact with the editor
+   */
   constructor({ data, api }) {
     this.data = data;
     this.api = api;
-    // this.export = document.querySelector('[data-tool="markdownParser"]');
   }
 
+  /**
+   * @return Plugin data such as title and icon
+   */
   static get toolbox() {
     return {
       title: 'Download Markdown',
@@ -23,6 +31,9 @@ export default class MarkdownParser {
     };
   }
 
+  /**
+   * @return empty div and run the export funtion
+   */
   render() {
     const doc = document.createElement('div');
 
@@ -30,19 +41,23 @@ export default class MarkdownParser {
     return doc;
   }
 
+  /**
+   * Function which takes saved editor data and runs the different parsing helper functions
+   * @return Markdown file download
+   */
   async getContent() {
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
     const yyyy = today.getFullYear();
 
-    const a = {};
+    const initialData = {};
     const data = await this.api.saver.save();
 
-    a.content = data.blocks;
+    initialData.content = data.blocks;
 
-    // TODO: remove html tags in paragraphs (code, highlight, a href)
-    const b = a.content.map((item) => {
+    const parsedData = initialData.content.map((item) => {
+      // iterate through editor data and parse the single blocks to markdown syntax
       switch (item.type) {
         case 'header':
           return parseHeaderToMarkdown(item.data);
@@ -67,7 +82,8 @@ export default class MarkdownParser {
       }
     });
 
-    fileDownloadHandler(b.join('\n'), `entry_${dd}-${mm}-${yyyy}.md`);
+    // take parsed data and create a markdown file
+    fileDownloadHandler(parsedData.join('\n'), `entry_${dd}-${mm}-${yyyy}.md`);
   }
 
   save() {

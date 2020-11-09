@@ -1,17 +1,29 @@
 import * as remark from 'remark';
-import { parseMarkdownToHeader } from './BlockTypeParsers/header-type-parser';
-import { parseMarkdownToParagraph } from './BlockTypeParsers/paragraph-type-parser';
-import { parseMarkdownToList } from './BlockTypeParsers/list-type-parser';
-import { parseMarkdownToDelimiter } from './BlockTypeParsers/delimiter-type-parser';
+import { parseMarkdownToHeader } from './BlockTypeParsers/HeaderTypeParser';
+import { parseMarkdownToParagraph } from './BlockTypeParsers/ParagraphTypeParser';
+import { parseMarkdownToList } from './BlockTypeParsers/ListTypeParser';
+import { parseMarkdownToDelimiter } from './BlockTypeParsers/DelimiterTypeParser';
+import { parseMarkdownToCode } from './BlockTypeParsers/CodeTypeParser';
+import { parseMarkdownToQuote } from './BlockTypeParsers/QuoteTypeParser';
 
 export const editorData = [];
 
-export default class ImportMarkdown {
+/**
+ * Markdown Import class
+ */
+export default class MarkdownImporter {
+  /**
+   * creates the Importer plugin
+   * {editorData, api functions} - necessary to interact with the editor
+   */
   constructor({ data, api }) {
     this.data = data;
     this.api = api;
   }
 
+  /**
+   * @return Plugin data such as title and icon
+   */
   static get toolbox() {
     return {
       title: 'Import Markdown',
@@ -19,6 +31,9 @@ export default class ImportMarkdown {
     };
   }
 
+  /**
+  * @return invinsible file upload form
+  */
   render() {
     const doc = document.createElement('input');
     doc.setAttribute('id', 'file-upload');
@@ -30,16 +45,17 @@ export default class ImportMarkdown {
     return doc;
   }
 
+  /**
+  * Function which parses markdown file to JSON which correspons the the editor structure
+  * @return Parsed markdown in JSON format
+  */
   async parseMarkdown() {
+    // empty the array before running the function again
+    editorData.length = 0;
 
     const a = {};
     const data = await this.api.saver.save();
     a.content = data.blocks;
-
-    //let b = [];
-    console.log('EditorJs content');
-    console.log(a.content);
-    console.log('--------------------');
 
     const fileUpload = document.getElementById('file-upload');
 
@@ -51,13 +67,10 @@ export default class ImportMarkdown {
 
       reader.onload = (readerEvent) => {
         const content = readerEvent.target.result;
-        console.log(remark().parse(content));
-        // TODO: implement switch case block for parsing
-        // markdown to json (editorjs)
+
         const parsedMarkdown = remark().parse(content);
-        
+        // iterating over the pared remarkjs syntax tree and executing the json parsers
         parsedMarkdown.children.forEach((item, index) => {
-          //console.log(item.children.forEach((item) => console.log(item)));
           switch (item.type) {
             case 'heading':
               return editorData.push(parseMarkdownToHeader(item));
@@ -67,20 +80,20 @@ export default class ImportMarkdown {
               return editorData.push(parseMarkdownToList(item));
             case 'thematicBreak':
               return editorData.push(parseMarkdownToDelimiter());
+            case 'code':
+              return editorData.push(parseMarkdownToCode(item));
+            case 'blockquote':
+              return editorData.push(parseMarkdownToQuote(item));
             default:
               break;
           }
         });
-        // filter through array and remove empty objects
-        console.log(editorData.filter((value) => Object.keys(value).length !== 0));
-
-        // TODO rerender editor with new parsed Data
-        // this.api.blocks.clear();
-        // this.api.blocks.render({
-        //   time: 1550476186479,
-        //   blocks: [editorData],
-        //   version: '2.18.0',
-        // });
+        // clear the editor
+        this.api.blocks.clear();
+        // render the editor with imported markdown data
+        this.api.blocks.render({
+          blocks: editorData.filter((value) => Object.keys(value).length !== 0), // filter through array and remove empty objects
+        });
 
         return remark().parse(content);
       };

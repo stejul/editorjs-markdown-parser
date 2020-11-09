@@ -1,7 +1,12 @@
 const path = require('path');
 
 module.exports = {
-entry: './src/index.js',
+  entry: {
+    bundle: [
+      path.resolve(__dirname, 'src/MarkdownParser.js'),
+      path.resolve(__dirname, 'src/MarkdownImporter.js'),
+    ],
+  },
   module: {
     rules: [
       {
@@ -24,11 +29,14 @@ entry: './src/index.js',
   },
   node: { global: true, fs: 'empty' },
   output: {
-    path: path.join(__dirname, '/dist'),
-    publicPath: '/',
-    filename: 'bundle.js',
-    library: 'MarkdownParser',
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
     libraryTarget: 'umd',
     libraryExport: 'default',
+  },
+  devServer: {
+    index: 'index.html',
+    compress: true,
+    port: 8000,
   },
 };

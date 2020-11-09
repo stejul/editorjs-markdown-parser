@@ -1,39 +1,26 @@
 {
   "scripts": {
     "build": "webpack --mode production",
-    "build:dev": "webpack --mode development --watch"
+    "build:dev": "webpack --mode development --watch",
+    "dev": "webpack-dev-server"
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
-    "@editorjs/checklist": "^1.1.0",
-    "@editorjs/code": "^2.5.0",
-    "@editorjs/delimiter": "^1.1.0",
-    "@editorjs/editorjs": "^2.18.0",
-    "@editorjs/embed": "^2.3.1",
-    "@editorjs/header": "^2.5.0",
-    "@editorjs/inline-code": "^1.3.1",
-    "@editorjs/link": "^2.2.1",
-    "@editorjs/list": "^1.5.0",
-    "@editorjs/marker": "^1.2.2",
-    "@editorjs/paragraph": "^2.7.0",
-    "@editorjs/quote": "^2.3.0",
-    "@editorjs/raw": "^2.1.2",
-    "@editorjs/simple-image": "^1.3.3",
-    "@editorjs/table": "^1.2.2",
-    "@editorjs/warning": "^1.1.1",
     "babel-loader": "^8.1.0",
     "eslint": "^7.7.0",
     "eslint-config-airbnb-base": "14.2.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "2.22.0",
     "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge-and-include-globally": "^2.1.26"
   },
-  "name": "editorjsparsertomarkdown",
-  "description": "Markdown Parser for Editor.js",
+  "name": "editorjsMdParser",
+  "description": "Import from markdown and export editorjs data to markdown",
   "version": "1.0.0",
-  "main": "markdown-parser.js",
+  "main": "./dist/bundle.js",
   "dependencies": {
     "css-loader": "^5.0.0",
     "remark": "^13.0.0",

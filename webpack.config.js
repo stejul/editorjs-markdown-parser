@@ -3,8 +3,7 @@ const path = require('path');
 module.exports = {
   entry: {
     bundle: [
-      path.resolve(__dirname, 'src/MarkdownParser.js'),
-      path.resolve(__dirname, 'src/MarkdownImporter.js'),
+      path.resolve(__dirname, 'src/index.js'),
     ],
   },
   module: {
@@ -32,7 +31,6 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
     libraryTarget: 'umd',
-    libraryExport: 'default',
   },
   devServer: {
     index: 'index.html',

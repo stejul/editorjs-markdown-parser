@@ -2,7 +2,6 @@
 
 <head>
     <link href="https://fonts.googleapis.com/css?family=PT+Mono" rel="stylesheet">
-    <link href="assets/demo.css" rel="stylesheet">
     <script src="dist/bundle.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script><!-- Header -->
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest"></script><!-- Image -->
@@ -12,13 +11,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script><!-- Quote -->
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/code@latest"></script><!-- Code -->
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script><!-- Embed -->
-    <script src="https://cdn.jsdelivr.net/npm/@editorjs/table@latest"></script><!-- Table -->
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/link@latest"></script><!-- Link -->
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/warning@latest"></script><!-- Warning -->
 
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script><!-- Marker -->
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/inline-code@latest"></script><!-- Inline Code -->
-    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script><!-- Inline Code -->
     <script src="dist/bundle.js"></script>
     <style>
         #title {
@@ -44,7 +42,7 @@
 </head>
 
 <body>
-    <h2 id="title">Editor.js - Github Gist Plugin</h2>
+    <h2 id="title">Editor.js - Markdown Importer/Exporter Plugin</h2>
     <div id="editorjs"></div>
     <div id="output-wrapper">
         <button id="save-button" class="cdx-button">Save</button>
@@ -109,17 +107,10 @@
                 linkTool: LinkTool,
 
                 embed: Embed,
+                
+                markdownParser: MDParser,
 
-                parser: MarkdownParser,
-                importer: MarkdownImporter,
-
-                table: {
-                    class: Table,
-                    inlineToolbar: true,
-                    shortcut: 'CMD+ALT+T'
-                },
-
-
+                mardkownImporter: MDImporter,
             },
         });
 

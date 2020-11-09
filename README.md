@@ -83,4 +83,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Acknowledgements
 
-* [Lukas Gabsi](https://github.com/stejul/editorjs-markdown-parser) - Helped me with his JS expertise
+* [Lukas Gabsi](https://github.com/gabsii) - Helped me with his JS expertise

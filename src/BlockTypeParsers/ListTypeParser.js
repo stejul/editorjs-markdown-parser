@@ -4,11 +4,11 @@ export function parseListToMarkdown(blocks) {
     case 'unordered':
       items = blocks.items.map((item) => (`* ${item}`));
 
-      return items.join('\n');
+      return items;
     case 'ordered':
       items = blocks.items.map((item, index) => (`${index + 1} ${item}`));
 
-      return items.join('\n');
+      return items;
     default:
       break;
   }
